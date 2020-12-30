@@ -22,6 +22,7 @@ from typing import IO
 
 from python_eulerian_video_magnification.magnifycolor import MagnifyColor
 from python_eulerian_video_magnification.magnifymotion import MagnifyMotion
+from python_eulerian_video_magnification.magnifymotion_riesz import MagnifyMotionRiesz
 from python_eulerian_video_magnification.metadata import MetaData
 from python_eulerian_video_magnification.mode import Mode
 
@@ -77,7 +78,7 @@ class CLI:
             # we got a valid (at least according to extension) file
             pass
         else:
-            logging.critical("Input is not a video file. Only supports %s" % ", ".join(formats))
+            logging.critical("Input is not a video file. Only supports %s", ", ".join(formats))
             sys.exit(10)
 
     def __manage_output_folder(self):
@@ -135,6 +136,10 @@ def main(args=None):
     elif cli.get_mode == Mode.MOTION:
         print("Starting Magnification in Motion Mode")
         magnify = MagnifyMotion
+        suffix = cli.args.motion_suffix
+    elif cli.get_mode == Mode.RIESZ:
+        print("Starting Magnification in Riesz Motion Mode")
+        magnify = MagnifyMotionRiesz
         suffix = cli.args.motion_suffix
     else:
         raise NotImplementedError("Unknown Mode")

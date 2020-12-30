@@ -24,7 +24,8 @@ class MagnifyColor(Magnify):
                 img = cv2.pyrUp(img)  # this doubles the dimensions of img each time
             # ensure that dimensions are equal
             origin_video[i] += self._correct_dimensionality_problem_after_pyr_up(img, origin_video_shape)
-        return origin_video
+        return origin_video  
+        #return amp_video
 
     def _correct_dimensionality_problem_after_pyr_up(self, img: np.ndarray, origin_video_frame_shape) -> np.ndarray:
         if img.shape != origin_video_frame_shape:

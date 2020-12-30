@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 
-def build_gaussian_pyramid(src, level=3):
-    s = src.copy()
+def build_gaussian_pyramid(src_frame, level=3):
+    s = src_frame.copy()
     pyramid = [s]
     for i in range(level):
         s = cv2.pyrDown(s)
@@ -11,8 +11,8 @@ def build_gaussian_pyramid(src, level=3):
     return pyramid
 
 
-def build_laplacian_pyramid(src, levels=3):
-    gaussianPyramid = build_gaussian_pyramid(src, levels)
+def build_laplacian_pyramid(src_frame, levels=3):
+    gaussianPyramid = build_gaussian_pyramid(src_frame, levels)
     pyramid = []
     for i in range(levels, 0, -1):
         GE = cv2.pyrUp(gaussianPyramid[i])

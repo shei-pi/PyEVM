@@ -14,7 +14,9 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
 
 def temporal_ideal_filter(tensor: np.ndarray, low: float, high: float, fps: int, axis: int = 0) -> np.ndarray:
     fft = fftpack.fft(tensor, axis=axis)
+
     frequencies = fftpack.fftfreq(tensor.shape[0], d=1.0 / fps)
+
     bound_low = (np.abs(frequencies - low)).argmin()
     bound_high = (np.abs(frequencies - high)).argmin()
     fft[:bound_low] = 0
